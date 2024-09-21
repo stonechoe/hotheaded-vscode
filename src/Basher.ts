@@ -1,5 +1,5 @@
-import * as path from "path";
-import * as glob from "glob";
+import path = require("path");
+import { glob } from "glob";
 import { addToPlayQueue } from "./Player";
 import { workspace } from "vscode";
 
@@ -10,12 +10,9 @@ export function initBashing(extensionPath: string): void {
 		globPattern = path.join(extensionPath, "assets/**/*.wav");
 	}
 
-	glob(
-		globPattern,
-		(error, matches) => {
-			bashes = matches;
-		}
-	);
+	glob(globPattern).then((matches) =>{
+		bashes = matches
+	});
 }
 
 const takenBashes: Array<string> = new Array<string>();
